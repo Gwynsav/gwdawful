@@ -10,6 +10,8 @@ local dpi       = beautiful.xresources.apply_dpi
 
 local helpers   = require('helpers')
 
+local spacing   = 5
+
 local function gettasklist(s)
     return awful.widget.tasklist {
         screen  = s,
@@ -33,8 +35,9 @@ local function gettasklist(s)
             awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
         },
         layout  = {
-            spacing = dpi(beautiful.bar_size / 10),
-            layout  = beautiful.bar_type == "vertical" and wibox.layout.fixed.vertical or wibox.layout.fixed.horizontal
+            spacing = dpi(spacing),
+            layout  = beautiful.bar_type == "vertical" and wibox.layout.fixed.vertical
+                                                       or wibox.layout.fixed.horizontal
         },
         style   = {
             shape   = helpers.mkroundedrect()
@@ -44,7 +47,7 @@ local function gettasklist(s)
                 {
                     widget  = awful.widget.clienticon
                 },
-                margins = dpi(beautiful.bar_size / 10),
+                margins = dpi(spacing),
                 widget  = wibox.container.margin
             },
             id      = 'background_role',

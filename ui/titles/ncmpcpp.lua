@@ -24,8 +24,8 @@ local song_prog = wibox.widget {
     handle_color     = beautiful.cya_d,
     handle_shape     = helpers.mkroundedrect(),
     bar_shape        = helpers.mkroundedrect(),
-    handle_width     = dpi(beautiful.resolution * 0.66),
-    forced_height    = dpi(beautiful.resolution * 0.66),
+    handle_width     = dpi(6),
+    forced_height    = dpi(6),
     minimum          = 0,
     widget           = wibox.widget.slider,
 }
@@ -60,7 +60,7 @@ local function infoline(default, size, color)
         {
             id     = 'text_role',
             markup = default,
-            font   = beautiful.ui_font .. dpi(beautiful.resolution * size),
+            font   = beautiful.ui_font .. dpi(size),
             widget = wibox.widget.textbox
         },
         fg       = color,
@@ -70,8 +70,8 @@ local function infoline(default, size, color)
         end
     }
 end
-local song_title  = infoline("<b>Nothing Playing</b>", 1,    beautiful.nfg)
-local song_artist = infoline("Unknown",                0.75, beautiful.dfg)
+local song_title  = infoline("<b>Nothing Playing</b>", 10, beautiful.nfg)
+local song_artist = infoline("Unknown",                8,  beautiful.dfg)
 
 -- Control buttons
 local function ctrlbtn(icon, run)
@@ -80,10 +80,10 @@ local function ctrlbtn(icon, run)
             {
                 id     = "text_role",
                 text   = icon,
-                font   = beautiful.ic_font .. dpi(beautiful.resolution * 1.3),
+                font   = beautiful.ic_font .. dpi(13),
                 widget = wibox.widget.textbox
             },
-            margins = dpi(0.4 * beautiful.resolution),
+            margins = dpi(4),
             widget  = wibox.container.margin
         },
         fg      = beautiful.nfg,
@@ -113,7 +113,7 @@ local vol_bar = wibox.widget {
         {
             text   = "",
             align  = "center",
-            font   = beautiful.ic_font .. dpi(beautiful.resolution * 1.3),
+            font   = beautiful.ic_font .. dpi(13),
             widget = wibox.widget.textbox
         },
         fg     = beautiful.grn,
@@ -129,18 +129,18 @@ local vol_bar = wibox.widget {
             handle_shape        = helpers.mkroundedrect(),
             minimum             = 0,
             maximum             = 100,
-            handle_width        = dpi(beautiful.resolution),
-            bar_height          = dpi(beautiful.resolution * 0.66),
-            forced_height       = dpi(beautiful.resolution),
-            forced_width        = dpi(beautiful.resolution * 6),
+            handle_width        = dpi(10),
+            bar_height          = dpi(6),
+            forced_height       = dpi(10),
+            forced_width        = dpi(6),
             widget              = wibox.widget.slider
         },
-        top    = dpi(beautiful.resolution * 1.5),
-        bottom = dpi(beautiful.resolution * 1.5),
-        right  = dpi(beautiful.resolution * 1.5),
+        top    = dpi(15),
+        bottom = dpi(15),
+        right  = dpi(15),
         widget = wibox.container.margin
     },
-    spacing = dpi(beautiful.resolution * 0.8),
+    spacing = dpi(8),
     layout  = wibox.layout.fixed.horizontal,
     get_slider = function(self)
         return self:get_children_by_id('slider_role')[1]
@@ -186,7 +186,7 @@ end
 
 local bottom = function(c)
     awful.titlebar(c, { position = "bottom", 
-                        size     = dpi(beautiful.resolution * 6.66), 
+                        size     = dpi(66), 
                         bg       = beautiful.titlebar_bg_focus }):setup {
         song_prog,
         {
@@ -202,7 +202,7 @@ local bottom = function(c)
                         valign = "center",
                         widget = wibox.container.place
                     },
-                    spacing = dpi(beautiful.resolution),
+                    spacing = dpi(10),
                     layout  = wibox.layout.fixed.horizontal
                 },
                 {
@@ -212,17 +212,17 @@ local bottom = function(c)
                         play_btn,
                         next_btn,
                         shff_btn,
-                        spacing = dpi(beautiful.resolution * 0.5),
+                        spacing = dpi(5),
                         layout  = wibox.layout.fixed.horizontal
                     },
-                    margins = dpi(beautiful.resolution * 0.66),
+                    margins = dpi(6),
                     widget  = wibox.container.margin
                 },
                 vol_bar,
                 expand = "none",
                 layout = wibox.layout.align.horizontal
             },
-            margins = dpi(beautiful.resolution),
+            margins = dpi(10),
             widget  = wibox.container.margin,
         },
         layout = wibox.layout.fixed.vertical
