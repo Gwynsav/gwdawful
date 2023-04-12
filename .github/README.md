@@ -1,10 +1,14 @@
-> **Warning!**
+> **Warning**
 It is not uncommon for me to commit broken code. Also I don't guarantee this setup to be stable
 or the slightest bit safe for use. You have been warned.
 
 ## TODO:
-- Finish ncmpcpp UI.
-- Maybe implement an lgi interface for NetworkManager and Bluez.
+- Massive refactor of how numbers are handled. As things currently are, I made a pretty
+big mistake where I performed a **shit ton** of arithmetic/logical operations through out
+the config, which in turn causes it to be extremely unstable and prone to crashing. I am
+currently working on fixing this, and so the configuration is currently undergoing pretty
+fundamental changes. If you were here considering to try it out, I would like to ask you
+not to, at least not for the time being.
 
 # Welcome, stranger!
 <img align="right" width="50%" src="./laptop_screenshot.png">

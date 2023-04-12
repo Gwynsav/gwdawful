@@ -40,8 +40,8 @@ local user = {}
 --- believe it follows the `battery_XXXX` pattern where XXXX is
 --- the `/sys/class/power_supply/` device name, e.g. BAT0/BAT1.
 --- Battery defaults to false and name to "battery_BAT0".
--- user.battery      = true
--- user.battery_name = "battery_BAT0"
+user.battery      = true
+user.battery_name = "battery_BAT0"
 
 --- Enable/disable brightness metrics and specify device to be used.
 --- The device name is found in `/sys/class/backlight/`. Common examples
@@ -124,7 +124,7 @@ user.border_rad   = 0
 ---  light:
 ---    'gruvbox', 'solarized', 'plata'
 --- More themes can be added at `themes/palettes`. DOES NOT have a default.
-user.clr_palette  = "everblush"
+user.clr_palette  = "plata"
 --- GTK icon pack to use, comment for Papirus or name.
 -- user.icon_pack    = "Papirus"
 --- Fonts to be used.

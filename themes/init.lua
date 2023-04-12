@@ -183,9 +183,9 @@ end
 
 theme.bar_position            = user.bar_pos ~= nil     and user.bar_pos     or "left"
 theme.bar_type                = (theme.bar_position == "left" or theme.bar_position == "right") and "vertical" or "horizontal"
-theme.bar_size                = user.bar_size ~= nil    and user.bar_size * theme.resolution
-                                or (theme.bar_type == "vertical" and 4.5 * theme.resolution) 
-                                or 3.825 * theme.resolution
+-- theme.bar_size                = user.bar_size ~= nil    and user.bar_size * theme.resolution
+--                                 or (theme.bar_type == "vertical" and 4.5 * theme.resolution) 
+--                                 or 3.825 * theme.resolution
 theme.wibar_bg                = theme.bg_normal
 theme.wibar_fg                = theme.fg_normal
 -- tasklist settings
@@ -306,5 +306,26 @@ theme.tooltip_shape           = gears.shape.rounded_rect
 theme.snap_bg                 = theme.taglist_bg_focus
 theme.snap_border_width       = dpi(theme.titles_size / 2)
 theme.snap_shape              = gears.shape.rectangle
+
+-- Refactor
+-----------
+theme.is_bar_horizontal       = theme.bar_type == "horizontal"
+theme.align_direction         = theme.is_bar_horizontal and wibox.layout.align.horizontal
+                                                        or wibox.layout.align.vertical
+theme.fixed_direction         = theme.is_bar_horizontal and wibox.layout.fixed.horizontal
+                                                        or wibox.layout.fixed.vertical
+
+-- Numbers, which I'm hopefully doing better this time.
+theme.scaling                 = 10.8
+theme.full_width              = theme.scaling * 100
+theme.full_height             = theme.full_width * theme.aspect_ratio
+
+theme.bar_size                = theme.scaling * 4.5
+-- This quite specific number will give **pretty** results
+-- when dividing most `theme.scaling` values.
+theme.item_spacing            = theme.scaling / 1.8
+theme.base_font_size          = theme.scaling * 1.15
+theme.subt_font_size          = theme.base_font_size * 1.25
+theme.title_font_size         = theme.subt_font_size * 1.25
 
 return theme
