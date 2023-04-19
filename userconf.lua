@@ -8,7 +8,7 @@
 ---------------
 -- These are mandatory, and therefore cannot be commented or deleted.
 -- Define your default applications, mainly used in 'config/keys.lua'
-terminal     = "tym"
+terminal     = "xterm"
 editor       = os.getenv("EDITOR")  or "emacs"
 browser      = os.getenv("BROWSER") or "firefox"
 top          = "htop"

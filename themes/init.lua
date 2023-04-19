@@ -321,9 +321,12 @@ theme.full_width              = theme.scaling * 100
 theme.full_height             = theme.full_width * theme.aspect_ratio
 
 theme.bar_size                = theme.scaling * 4.5
+theme.title_size              = theme.scaling * 3
 -- This quite specific number will give **pretty** results
 -- when dividing most `theme.scaling` values.
 theme.item_spacing            = theme.scaling / 1.8
+-- The `title` and `subt` don't refer to the window titles, but rather
+-- the size's use in widgets.
 theme.base_font_size          = theme.scaling * 1.15
 theme.subt_font_size          = theme.base_font_size * 1.25
 theme.title_font_size         = theme.subt_font_size * 1.25

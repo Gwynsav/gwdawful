@@ -12,8 +12,10 @@ local dpi       = beautiful.xresources.apply_dpi
 
 local helpers   = require('helpers')
 
-local title_size = 25
-local spacing    = 6
+local flip_dir  = (beautiful.titles_inverted and beautiful.is_bar_horizontal)     and "west"  or
+                  (not beautiful.titles_inverted and beautiful.is_bar_horizontal) and "east"  or
+                  (beautiful.titles_inverted and not beautiful.is_bar_horizontal) and "south" or
+                  "north"
 
 -- Buttons
 ----------
@@ -22,7 +24,7 @@ local mkbutton = function (width, color, onclick)
     local button = wibox.widget {
       wibox.widget.textbox(),
       forced_width  = dpi(width),
-      forced_height = dpi(title_size),
+      forced_height = dpi(beautiful.title_size),
       bg            = beautiful.titlebar_bg_normal,
       shape         = helpers.mkroundedrect(0),
       widget        = wibox.container.background
@@ -53,21 +55,21 @@ local mkbutton = function (width, color, onclick)
   end
 end
 
-local close = mkbutton(33, beautiful.red, function(c)
+local close = mkbutton(1.5 * beautiful.title_size, beautiful.red, function(c)
     c:kill()
 end)
 
-local maximize = mkbutton(7, beautiful.ylw, function(c)
+local maximize = mkbutton(beautiful.title_size, beautiful.ylw, function(c)
     c.maximized = not c.maximized
 end)
 
-local minimize = mkbutton(7, beautiful.ylw, function(c)
+local minimize = mkbutton(beautiful.title_size, beautiful.ylw, function(c)
     gears.timer.delayed_call(function()
         c.minimized = not c.minimized
     end)
 end)
 
-local sticky = mkbutton(7, beautiful.grn, function(c)
+local sticky = mkbutton(beautiful.title_size, beautiful.grn, function(c)
     c.sticky = not c.sticky
 end)
 
@@ -90,7 +92,7 @@ client.connect_signal("request::titlebars", function(c)
     }
 
     local n_titlebar = awful.titlebar(c, {
-        size     = title_size,
+        size     = beautiful.title_size,
         position = beautiful.titles_position,
     })
     n_titlebar.widget = {
@@ -100,7 +102,7 @@ client.connect_signal("request::titlebars", function(c)
                     close(c),
                     maximize(c),
                     minimize(c),
-                    spacing = dpi(spacing),
+                    spacing = dpi(beautiful.item_spacing),
                     layout  = wibox.layout.fixed.horizontal
                 },
                 { -- Middle
@@ -109,20 +111,16 @@ client.connect_signal("request::titlebars", function(c)
                 },
                 { -- End
                     sticky(c),
-                    spacing = dpi(spacing),
+                    spacing = dpi(beautiful.item_spacing),
                     layout  = wibox.layout.fixed.horizontal
                 },
-                spacing = dpi(spacing),
+                spacing = dpi(beautiful.item_spacing),
                 layout  = wibox.layout.align.horizontal
             },
-            direction =
-               (beautiful.titles_inverted and beautiful.titles_type == "vertical")     and "west"  or
-               (not beautiful.titles_inverted and beautiful.titles_type == "vertical") and "east"  or
-               (beautiful.titles_inverted and beautiful.titles_type == "horizontal")   and "south" or
-               "north",
+            direction = flip_dir,
             widget    = wibox.container.rotate
         },
-        margins = dpi(9),
+        margins = dpi(beautiful.scaling),
         widget  = wibox.container.margin
     }
 end)

@@ -14,6 +14,8 @@ local dpi       = beautiful.xresources.apply_dpi
 local helpers   = require('helpers')
 local playerctl = require('modules.bling').signal.playerctl.lib()
 
+local player_size = beautiful.title_size * 2
+
 -- Widgets
 ----------
 -- Draggable progressbar
