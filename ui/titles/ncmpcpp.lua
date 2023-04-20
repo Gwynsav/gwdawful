@@ -26,8 +26,8 @@ local song_prog = wibox.widget {
     handle_color     = beautiful.cya_d,
     handle_shape     = helpers.mkroundedrect(),
     bar_shape        = helpers.mkroundedrect(),
-    handle_width     = dpi(6),
-    forced_height    = dpi(6),
+    handle_width     = dpi(beautiful.item_spacing),
+    forced_height    = dpi(beautiful.item_spacing),
     minimum          = 0,
     widget           = wibox.widget.slider,
 }
@@ -72,8 +72,8 @@ local function infoline(default, size, color)
         end
     }
 end
-local song_title  = infoline("<b>Nothing Playing</b>", 10, beautiful.nfg)
-local song_artist = infoline("Unknown",                8,  beautiful.dfg)
+local song_title  = infoline("<b>Nothing Playing</b>", beautiful.base_font_size, beautiful.nfg)
+local song_artist = infoline("Unknown",                beautiful.tiny_font_size, beautiful.dfg)
 
 -- Control buttons
 local function ctrlbtn(icon, run)
@@ -82,10 +82,10 @@ local function ctrlbtn(icon, run)
             {
                 id     = "text_role",
                 text   = icon,
-                font   = beautiful.ic_font .. dpi(13),
+                font   = beautiful.ic_font .. dpi(beautiful.subt_font_size),
                 widget = wibox.widget.textbox
             },
-            margins = dpi(4),
+            margins = dpi(beautiful.item_spacing),
             widget  = wibox.container.margin
         },
         fg      = beautiful.nfg,
@@ -115,7 +115,7 @@ local vol_bar = wibox.widget {
         {
             text   = "",
             align  = "center",
-            font   = beautiful.ic_font .. dpi(13),
+            font   = beautiful.ic_font .. dpi(beautiful.subt_font_size),
             widget = wibox.widget.textbox
         },
         fg     = beautiful.grn,
@@ -131,18 +131,18 @@ local vol_bar = wibox.widget {
             handle_shape        = helpers.mkroundedrect(),
             minimum             = 0,
             maximum             = 100,
-            handle_width        = dpi(10),
-            bar_height          = dpi(6),
-            forced_height       = dpi(10),
-            forced_width        = dpi(6),
+            handle_width        = dpi(beautiful.base_font_size),
+            bar_height          = dpi(beautiful.item_spacing),
+            forced_height       = dpi(beautiful.base_font_size),
+            forced_width        = dpi(beautiful.item_spacing),
             widget              = wibox.widget.slider
         },
-        top    = dpi(15),
-        bottom = dpi(15),
-        right  = dpi(15),
+        top    = dpi(beautiful.title_font_size),
+        bottom = dpi(beautiful.title_font_size),
+        right  = dpi(beautiful.title_font_size),
         widget = wibox.container.margin
     },
-    spacing = dpi(8),
+    spacing = dpi(beautiful.tiny_font_size),
     layout  = wibox.layout.fixed.horizontal,
     get_slider = function(self)
         return self:get_children_by_id('slider_role')[1]
@@ -165,7 +165,7 @@ end)
 --------------
 local top = function(c)
     awful.titlebar(c, { position = "top", 
-                        size     = dpi(beautiful.titles_size), 
+                        size     = dpi(beautiful.title_size), 
                         bg       = beautiful.titlebar_bg_focus }):setup {
         nil,
         nil,
@@ -188,7 +188,7 @@ end
 
 local bottom = function(c)
     awful.titlebar(c, { position = "bottom", 
-                        size     = dpi(66), 
+                        size     = dpi(player_size), 
                         bg       = beautiful.titlebar_bg_focus }):setup {
         song_prog,
         {
@@ -204,7 +204,7 @@ local bottom = function(c)
                         valign = "center",
                         widget = wibox.container.place
                     },
-                    spacing = dpi(10),
+                    spacing = dpi(beautiful.base_font_size),
                     layout  = wibox.layout.fixed.horizontal
                 },
                 {
@@ -214,17 +214,17 @@ local bottom = function(c)
                         play_btn,
                         next_btn,
                         shff_btn,
-                        spacing = dpi(5),
+                        spacing = dpi(beautiful.item_spacing),
                         layout  = wibox.layout.fixed.horizontal
                     },
-                    margins = dpi(6),
+                    margins = dpi(beautiful.item_spacing),
                     widget  = wibox.container.margin
                 },
                 vol_bar,
                 expand = "none",
                 layout = wibox.layout.align.horizontal
             },
-            margins = dpi(10),
+            margins = dpi(beautiful.base_font_size),
             widget  = wibox.container.margin,
         },
         layout = wibox.layout.fixed.vertical
@@ -280,7 +280,7 @@ end)
 --------
 local ncmpcpp_ui = function(c)
     -- Unbind default titlebar
-    awful.titlebar.hide(c, beautiful.titles_position)
+    awful.titlebar.hide(c, beautiful.title_side)
 
     -- Bind custom titlebars
     bottom(c)

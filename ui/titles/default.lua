@@ -12,10 +12,10 @@ local dpi       = beautiful.xresources.apply_dpi
 
 local helpers   = require('helpers')
 
-local flip_dir  = (beautiful.titles_inverted and beautiful.is_bar_horizontal)     and "west"  or
-                  (not beautiful.titles_inverted and beautiful.is_bar_horizontal) and "east"  or
-                  (beautiful.titles_inverted and not beautiful.is_bar_horizontal) and "south" or
-                  "north"
+local flip_dir  = (beautiful.titles_inverted     and beautiful.is_title_horizontal) and "south" or
+                  (not beautiful.titles_inverted and beautiful.is_title_horizontal) and "north" or
+                  (beautiful.titles_inverted and not beautiful.is_title_horizontal) and "west"  or
+                  "east"
 
 -- Buttons
 ----------
@@ -93,7 +93,7 @@ client.connect_signal("request::titlebars", function(c)
 
     local n_titlebar = awful.titlebar(c, {
         size     = beautiful.title_size,
-        position = beautiful.titles_position,
+        position = beautiful.title_side,
     })
     n_titlebar.widget = {
         {

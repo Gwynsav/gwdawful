@@ -36,7 +36,7 @@ ruled.notification.connect_signal('request::rules', function()
             ontop            = true,
             implicit_timeout = 6,
             border_width     = dpi(beautiful.border_width),
-            position         = beautiful.notification_position
+            position         = beautiful.notification_side
         }
     }
 end)

@@ -76,7 +76,7 @@ user.battery_name = "battery_BAT0"
 --- System bar size (screen %). Defaults to 4.5.
 -- user.bar_size     = 4.5
 --- Can be 'top', 'bottom', 'right' or 'left'. Defaults to 'left'.
--- user.bar_pos      = "right"
+user.bar_pos      = "right"
 --- Adds 'outer_gaps' to the bar. Defaults to false.
 -- user.bar_gap      = false
 

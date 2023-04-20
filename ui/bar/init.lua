@@ -252,7 +252,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
     }
     s.mywibox = awful.wibar {
         visible  = beautiful.bar_enabled,
-        position = beautiful.bar_position,
+        position = beautiful.bar_side,
         screen   = s,
         width    = beautiful.is_bar_horizontal and dpi(bar_length) or dpi(beautiful.bar_size),
         height   = beautiful.is_bar_horizontal and dpi(beautiful.bar_size) or dpi(bar_length),
