@@ -11,6 +11,9 @@ local dpi           = beautiful.xresources.apply_dpi
 local helpers       = require('helpers')
 local bling         = require('modules.bling')
 
+local item_height   = beautiful.scaling * 6
+local item_width    = item_height * 4
+
 -- Launcher
 -----------
 local app_launcher  = bling.widget.app_launcher({
@@ -34,12 +37,12 @@ local app_launcher  = bling.widget.app_launcher({
     -- Geometry
     apps_per_row        = 6,
     apps_per_column     = 2,
-    apps_spacing        = dpi(beautiful.resolution / 2),
-    app_width           = dpi(beautiful.resolution * 24),
-    app_height          = dpi(beautiful.resolution * 6),
-    app_content_padding = dpi(beautiful.resolution * 2),
-    prompt_height       = dpi(beautiful.resolution * 6),
-    prompt_paddings     = dpi(beautiful.resolution * 2),
+    apps_spacing        = dpi(beautiful.item_spacing),
+    app_width           = dpi(item_width),
+    app_height          = dpi(item_height),
+    app_content_padding = dpi(beautiful.giga_padding),
+    prompt_height       = dpi(item_height),
+    prompt_paddings     = dpi(beautiful.giga_padding),
     border_width        = beautiful.border_width,
     shape               = helpers.mkroundedrect(),
     prompt_shape        = helpers.mkroundedrect(),

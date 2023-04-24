@@ -12,11 +12,13 @@ local dpi       = beautiful.xresources.apply_dpi
 
 local helpers   = require('helpers')
 
-local user_panel  = require('ui.dashboard.modules.user_panel')
-local qk_actions  = require('ui.dashboard.modules.qk_actions')
-local music       = require('ui.dashboard.modules.music')
-local sliders     = require('ui.dashboard.modules.sliders')
-local calendar    = require('ui.dashboard.modules.calendar')
+local user_panel = require('ui.dashboard.modules.user_panel')
+local qk_actions = require('ui.dashboard.modules.qk_actions')
+local music      = require('ui.dashboard.modules.music')
+local sliders    = require('ui.dashboard.modules.sliders')
+local calendar   = require('ui.dashboard.modules.calendar')
+
+local Width      = beautiful.dashboard_size * 0.55 
 
 -- Dashboard
 ------------
@@ -24,7 +26,7 @@ local calendar    = require('ui.dashboard.modules.calendar')
 local dashboardBox = wibox {
     ontop   = true,
     visible = false,
-    width   = dpi(beautiful.dashboard_size * 0.55),
+    width   = dpi(Width),
     height  = dpi(beautiful.dashboard_size),
     shape   = helpers.mkroundedrect(),
     bg      = beautiful.bg_normal
@@ -34,7 +36,7 @@ local header = wibox.widget {
     {
         id     = 'text_role',
         markup = "<b>System Panel</b>",
-        font   = beautiful.ui_font .. dpi(beautiful.dashboard_size * 0.018),
+        font   = beautiful.ui_font .. dpi(beautiful.subt_font_size),
         widget = wibox.widget.textbox
     },
     fg     = beautiful.gry,
@@ -59,7 +61,7 @@ dashboardBox:setup {
                 music(),
                 calendar(),
                 qk_actions(),
-                spacing = dpi(beautiful.dashboard_size / 80),
+                spacing = dpi(beautiful.scaling),
                 layout  = wibox.layout.fixed.vertical
             },
             strategy = "exact",
@@ -75,7 +77,7 @@ dashboardBox:setup {
         },
         layout = wibox.layout.align.horizontal
     },
-    margins = dpi(beautiful.dashboard_size / 40),
+    margins = dpi(beautiful.giga_padding),
     widget  = wibox.container.margin
 }
 

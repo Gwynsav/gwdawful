@@ -84,10 +84,12 @@ end
 
 -- Fullscreen screenshot
 awesome.connect_signal("screenshot::fullscreen", function()
-    take_screenshot("shotgun")
+    -- take_screenshot("shotgun")
+    take_screenshot("maim")
 end)
 
 -- Selection screenshot
 awesome.connect_signal("screenshot::selection", function()
-    take_screenshot("shotgun $(hacksaw -f '-i %i -g %g')")
+    -- take_screenshot("shotgun $(hacksaw -f '-i %i -g %g')")
+    take_screenshot("maim -s")
 end)

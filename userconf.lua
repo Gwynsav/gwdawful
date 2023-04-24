@@ -8,8 +8,8 @@
 ---------------
 -- These are mandatory, and therefore cannot be commented or deleted.
 -- Define your default applications, mainly used in 'config/keys.lua'
-terminal     = "xterm"
-editor       = os.getenv("EDITOR")  or "emacs"
+terminal     = "tym"
+editor       = os.getenv("EDITOR")  or "nvim"
 browser      = os.getenv("BROWSER") or "firefox"
 top          = "htop"
 files_cli    = "lf"
@@ -30,8 +30,8 @@ local user = {}
 --- Keyboard layouts to switch between using `mod + u`. Comment `kb_layout2` 
 --- to disable this behavior. If set, `kb_layout1` will be set as keyboard 
 --- layout on startup.
--- user.kb_layout1   = "us"
--- user.kb_layout2   = "latam"
+user.kb_layout1   = "us"
+user.kb_layout2   = "latam"
 
 -- Features
 -----------
@@ -40,8 +40,8 @@ local user = {}
 --- believe it follows the `battery_XXXX` pattern where XXXX is
 --- the `/sys/class/power_supply/` device name, e.g. BAT0/BAT1.
 --- Battery defaults to false and name to "battery_BAT0".
-user.battery      = true
-user.battery_name = "battery_BAT0"
+-- user.battery      = true
+-- user.battery_name = "battery_BAT0"
 
 --- Enable/disable brightness metrics and specify device to be used.
 --- The device name is found in `/sys/class/backlight/`. Common examples
@@ -52,7 +52,7 @@ user.battery_name = "battery_BAT0"
 
 --- Enable/disable bluetooth metrics. No need to specify device name.
 --- Defaults to false.
--- user.bluetooth    = true
+user.bluetooth    = true
 
 -- UI
 -----
@@ -120,11 +120,11 @@ user.border_rad   = 0
 ----------
 --- Supported themes:
 ---  dark:
----    'everblush', 'everforest', 'tokyonight', 'mar' 
+---    'everblush', 'everforest', 'tokyonight', 'fullerene' 
 ---  light:
----    'gruvbox', 'solarized', 'plata'
+---    'gruvbox', 'solarized'
 --- More themes can be added at `themes/palettes`. DOES NOT have a default.
-user.clr_palette  = "plata"
+user.clr_palette  = "everforest"
 --- GTK icon pack to use, comment for Papirus or name.
 -- user.icon_pack    = "Papirus"
 --- Fonts to be used.
@@ -143,7 +143,7 @@ user.clr_palette  = "plata"
 --- AwesomeWM icon to be used (comment for default awesome icon): 
 ---   'arch', 'debian', 'fedora', 'nix', 'ubuntu' or 'void'.
 --- Can also be a path to an image.
--- user.awm_icon     = "debian"
+user.awm_icon     = "nix"
 
 -- Miscelaneous
 ---------------

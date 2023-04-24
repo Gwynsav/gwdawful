@@ -56,6 +56,60 @@ theme.fg_urgent = theme.red
 --------------
 -- Settings --
 --------------
+-- Refactor
+-----------
+-- Bar position. The position of the rest of the UI is based on this.
+theme.bar_side            = user.bar_pos ~= nil and user.bar_pos or "bottom"
+theme.is_bar_horizontal   = (theme.bar_side == "top" or theme.bar_side == "bottom") and true 
+                            or false
+theme.align_direction     = theme.is_bar_horizontal and wibox.layout.align.horizontal
+                                                    or wibox.layout.align.vertical
+theme.fixed_direction     = theme.is_bar_horizontal and wibox.layout.fixed.horizontal
+                                                    or wibox.layout.fixed.vertical
+
+-- Set the title type to the opposite of the bar. If user changes sides,
+-- use the other side of said type.
+theme.is_title_horizontal = not theme.is_bar_horizontal
+theme.change_title_side   = false
+theme.title_side          = (theme.is_title_horizontal and theme.change_title_side)         and "bottom" or
+                            (not theme.is_title_horizontal and not theme.change_title_side) and "right"  or
+                            (not theme.is_title_horizontal and theme.change_title_side)     and "left"   or
+                            "top"
+
+-- Position of notifications on the screen. Based on bar and title position.
+-- By far the ugliest of the bunch, since there are 8 possibilities.
+theme.notification_side   = ((theme.bar_side == "top"    and theme.change_title_side)
+                            or (theme.bar_side == "left" and not theme.change_title_side))  and "bottom_right" or
+                            ((theme.bar_side == "top"    and not theme.change_title_side)
+                            or (theme.bar_side == "right" and not theme.change_title_side)) and "bottom_left"  or
+                            ((theme.bar_side == "bottom" and theme.change_title_side)     
+                            or (theme.bar_side == "left" and theme.change_title_side))      and "top_right"    or
+                            "top_left"
+
+-- Numbers, which I'm hopefully doing better this time
+------------------------------------------------------
+-- Screen.
+theme.scaling             = 10.8
+theme.aspect_ratio        = user.aspect_ratio ~= nil and user.aspect_ratio or 16/9
+theme.full_height         = theme.scaling     * 100
+theme.full_width          = theme.full_height * theme.aspect_ratio
+-- Widget geometry.
+theme.bar_size            = theme.scaling * 4.5
+theme.title_size          = theme.scaling * 3
+theme.dashboard_size      = theme.scaling * 75
+-- This quite specific number will give **pretty** results
+-- when dividing most `theme.scaling` values.
+theme.item_spacing        = theme.scaling        / 1.8
+theme.item_padding        = theme.item_spacing   * 1.333
+theme.giga_padding        = theme.item_padding   * 2.5
+theme.ring_size           = theme.scaling        * 0.37
+-- The `title` and `subt` don't refer to the window titles, but rather
+-- the size's use in widgets.
+theme.tiny_font_size      = theme.scaling        * 0.81
+theme.base_font_size      = theme.tiny_font_size * 1.22
+theme.subt_font_size      = theme.base_font_size * 1.2
+theme.title_font_size     = theme.subt_font_size * 1.23
+
 -- General
 ----------
 theme.modkey                  = user.modkey ~= nil and user.modkey or "Mod4"
@@ -79,7 +133,6 @@ end
 -- Scaling
 ----------
 theme.resolution              = user.resolution ~= nil   and user.resolution / 100 or 10.8
-theme.aspect_ratio            = user.aspect_ratio ~= nil and user.aspect_ratio or 16/9
 if user.dpi ~= nil then
     beautiful.xresources.set_dpi(user.dpi)
 end
@@ -242,8 +295,8 @@ theme.mstab_border_radius     = theme.rounded_clients and dpi(theme.border_radiu
 
 -- Dashboard
 ------------
-theme.dashboard_size          = user.dash_size ~= nil and user.dash_size * theme.resolution 
-                                or 75 * theme.resolution
+-- theme.dashboard_size          = user.dash_size ~= nil and user.dash_size * theme.resolution 
+                                -- or 75 * theme.resolution
 
 -- Notifications
 ----------------
@@ -306,52 +359,5 @@ theme.tooltip_shape           = gears.shape.rounded_rect
 theme.snap_bg                 = theme.taglist_bg_focus
 theme.snap_border_width       = dpi(theme.titles_size / 2)
 theme.snap_shape              = gears.shape.rectangle
-
--- Refactor
------------
--- Bar position. The position of the rest of the UI is based on this.
-theme.bar_side                = user.bar_pos ~= nil and user.bar_pos or "bottom"
-theme.is_bar_horizontal       = (theme.bar_side == "top" or theme.bar_side == "bottom") and true
-                                or false
-theme.align_direction         = theme.is_bar_horizontal and wibox.layout.align.horizontal
-                                                        or wibox.layout.align.vertical
-theme.fixed_direction         = theme.is_bar_horizontal and wibox.layout.fixed.horizontal
-                                                        or wibox.layout.fixed.vertical
-
--- Set the title type to the opposite of the bar. If user changes sides,
--- use the other side of said type.
-theme.is_title_horizontal     = not theme.is_bar_horizontal
-theme.change_title_side       = false
-theme.title_side              = (theme.is_title_horizontal and theme.change_title_side)         and "bottom" or
-                                (not theme.is_title_horizontal and not theme.change_title_side) and "right"  or
-                                (not theme.is_title_horizontal and theme.change_title_side)     and "left"   or
-                                "top"
-
--- Position of notifications on the screen. Based on bar and title position.
--- By far the ugliest of the bunch, since there are 8 possibilities.
-theme.notification_side       = ((theme.bar_side == "top"    and theme.change_title_side)
-                                or (theme.bar_side == "left" and not theme.change_title_side))  and "bottom_right" or
-                                ((theme.bar_side == "top"    and not theme.change_title_side)
-                                or (theme.bar_side == "right" and not theme.change_title_side)) and "bottom_left"  or
-                                ((theme.bar_side == "bottom" and theme.change_title_side)     
-                                or (theme.bar_side == "left" and theme.change_title_side))      and "top_right"    or
-                                "top_left"
-
--- Numbers, which I'm hopefully doing better this time.
-theme.scaling                 = 10.8
-theme.full_width              = theme.scaling * 100
-theme.full_height             = theme.full_width * theme.aspect_ratio
-
-theme.bar_size                = theme.scaling * 4.5
-theme.title_size              = theme.scaling * 3
--- This quite specific number will give **pretty** results
--- when dividing most `theme.scaling` values.
-theme.item_spacing            = theme.scaling / 1.8
--- The `title` and `subt` don't refer to the window titles, but rather
--- the size's use in widgets.
-theme.base_font_size          = theme.scaling * 1.02
-theme.subt_font_size          = theme.base_font_size * 1.18
-theme.title_font_size         = theme.subt_font_size * 1.23
-theme.tiny_font_size          = theme.base_font_size * 0.72
 
 return theme

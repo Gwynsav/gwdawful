@@ -13,7 +13,7 @@ local rubato    = require('modules.rubato')
 -- Animation
 ------------
 local anim_y = rubato.timed {
-    pos             = dpi(beautiful.resolution * 101),
+    pos             = dpi(beautiful.scaling * 101),
     rate            = 60,
     easing          = rubato.quadratic,
     intro           = 0.1,
@@ -21,7 +21,7 @@ local anim_y = rubato.timed {
     awestore_compat = true -- This option must be set to true.
 }
 local anim_x = rubato.timed {
-    pos             = dpi(beautiful.resolution * 40),
+    pos             = dpi(beautiful.scaling * 40),
     rate            = 60,
     easing          = rubato.quadratic,
     intro           = 0.1,
@@ -33,21 +33,20 @@ local anim_x = rubato.timed {
 --------
 -- Positioning spaguetti. Essentially, this block ensures the scratchpad is always at the center of
 -- the work area by taking the dimensions of the wibar and its gaps into account.
-local bar_dimensions = beautiful.bar_gap and beautiful.bar_size + beautiful.outer_gaps or beautiful.bar_size
 local x_position     = 
     not beautiful.bar_enabled or beautiful.bar_type == "horizontal" and
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - beautiful.scratchpad_width) / 2 
+        (beautiful.full_width - beautiful.scratchpad_width) / 2 
     or beautiful.bar_position == "left" and 
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - beautiful.scratchpad_width + bar_dimensions) / 2
+        (beautiful.full_width - beautiful.scratchpad_width + beautiful.bar_size) / 2
     or beautiful.bar_position == "right" and 
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - beautiful.scratchpad_width - bar_dimensions) / 2
+        (beautiful.full_width - beautiful.scratchpad_width - beautiful.bar_size) / 2
 local y_position     = 
     not beautiful.bar_enabled or beautiful.bar_type == "vertical" and
-        (beautiful.resolution * 100 - beautiful.scratchpad_height) / 2
+        (beautiful.full_height - beautiful.scratchpad_height) / 2
     or beautiful.bar_position == "top" and 
-        (beautiful.resolution * 100 - beautiful.scratchpad_height + bar_dimensions) / 2
+        (beautiful.full_height - beautiful.scratchpad_height + beautiful.bar_size) / 2
     or beautiful.bar_position == "bottom" and 
-        (beautiful.resolution * 100 - beautiful.scratchpad_height - bar_dimensions) / 2
+        (beautiful.full_height - beautiful.scratchpad_height - beautiful.bar_size) / 2
 
 -- Determine terminal runtime command and rule matching title/class.
 -- Works for a few terminals, may need manual tuning for some others.
@@ -87,22 +86,22 @@ scratch.terminal = bling.module.scratchpad {
 }
 
 -- Music player scratchpad
-local music_height = dpi(beautiful.resolution * 45)
-local music_width  = dpi(beautiful.resolution * beautiful.aspect_ratio * 33)
+local music_height = dpi(beautiful.full_height * 45)
+local music_width  = dpi(beautiful.full_width * 33)
 local x_music     = 
     not beautiful.bar_enabled or beautiful.bar_type == "horizontal" and
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - music_width) / 2 
+        (beautiful.full_width - music_width) / 2 
     or beautiful.bar_position == "left" and 
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - music_width + bar_dimensions) / 2
+        (beautiful.full_width - music_width + beautiful.bar_size) / 2
     or beautiful.bar_position == "right" and 
-        (beautiful.resolution * beautiful.aspect_ratio * 100 - music_width - bar_dimensions) / 2
+        (beautiful.full_width - music_width - beautiful.bar_size) / 2
 local y_music     = 
     not beautiful.bar_enabled or beautiful.bar_type == "vertical" and
-        (beautiful.resolution * 100 - music_height) / 2
+        (beautiful.full_height - music_height) / 2
     or beautiful.bar_position == "top" and 
-        (beautiful.resolution * 100 - music_height + bar_dimensions) / 2
+        (beautiful.full_height - music_height + beautiful.bar_size) / 2
     or beautiful.bar_position == "bottom" and 
-        (beautiful.resolution * 100 - music_height - bar_dimensions) / 2
+        (beautiful.full_height - music_height - beautiful.bar_size) / 2
 
 scratch.music = bling.module.scratchpad {
     command     = terminal .. term_cmd .. "ncmpcpp" .. rule_name .. "ncmpcpp",

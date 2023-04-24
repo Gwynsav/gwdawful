@@ -17,25 +17,23 @@ local launcher  = require('ui.app_launcher')
 
 -- Variables
 ------------
-local Font_size    = beautiful.base_font_size
-local Icon_size    = beautiful.subt_font_size
 local Tray_icon    = beautiful.bar_size / 2
 local Batt_length  = beautiful.bar_size * 1.25
-local Side_padding = beautiful.is_bar_horizontal and Font_size or beautiful.item_spacing
-local Ends_padding = beautiful.is_bar_horizontal and beautiful.item_spacing or Font_size
+local Side_padding = beautiful.is_bar_horizontal and beautiful.subt_font_size or beautiful.item_spacing
+local Ends_padding = beautiful.is_bar_horizontal and beautiful.item_spacing or beautiful.subt_font_size
 
 -- Bar Widgets
 --------------
--- Awesome launcher button
+-- Dashboard Launcher
 local bar_dash = wibox.widget { 
     {
         {
             {
                 image      = beautiful.awesome_icon,
-                clip_shape = helpers.mkroundedrect(0), 
+                clip_shape = helpers.mkroundedrect(beautiful.border_radius), 
                 widget     = wibox.widget.imagebox 
             },
-            margins = dpi(beautiful.item_spacing),
+            margins = dpi(beautiful.item_padding),
             widget  = wibox.container.margin
         },
         align  = "center",
@@ -59,7 +57,7 @@ local bar_launcher = wibox.widget {
     {
         {
             text    = "",
-            font    = beautiful.ic_font .. dpi(Icon_size),
+            font    = beautiful.ic_font .. dpi(beautiful.title_font_size),
             align   = "center",
             widget  = wibox.widget.textbox
         },
@@ -85,7 +83,7 @@ local function status_widget(button)
         {
             {
                 id      = "text_role",
-                font    = beautiful.ic_font .. dpi(Icon_size),
+                font    = beautiful.ic_font .. dpi(beautiful.title_font_size),
                 align   = "center",
                 widget  = wibox.widget.textbox,
             },
@@ -136,7 +134,7 @@ local flipped_battery = wibox.widget {
 local bar_battery_text = wibox.widget {
     {
         id      = "text_role",
-        font    = beautiful.ic_font .. dpi(Icon_size),
+        font    = beautiful.ic_font .. dpi(beautiful.title_font_size),
         align   = "center",
         widget  = wibox.widget.textbox,
     },
@@ -162,7 +160,7 @@ local systray_btn = wibox.widget {
     {
         {
             text    = "",
-            font    = beautiful.ic_font .. dpi(Icon_size),
+            font    = beautiful.ic_font .. dpi(beautiful.title_font_size),
             align   = "center",
             widget  = wibox.widget.textbox,
         },
@@ -186,14 +184,14 @@ local vbar_clock = {
         {
             {
                 format = '<b>%H</b>',
-                font   = beautiful.mn_font .. dpi(Font_size),
+                font   = beautiful.mn_font .. dpi(beautiful.subt_font_size),
                 halign = "center",
                 widget = wibox.widget.textclock
             },
             {
                 {
                     format = '<b>%M</b>',
-                    font   = beautiful.mn_font .. dpi(Font_size),
+                    font   = beautiful.mn_font .. dpi(beautiful.subt_font_size),
                     halign = "center",
                     widget = wibox.widget.textclock
                 },
@@ -213,7 +211,7 @@ local hbar_clock = {
     {
         {
             format = '<b>%H:%M</b>',
-            font   = beautiful.mn_font .. dpi(Font_size),
+            font   = beautiful.mn_font .. dpi(beautiful.subt_font_size),
             valign = "center",
             widget = wibox.widget.textclock
         },
@@ -228,8 +226,8 @@ local hbar_clock = {
 -- Awesome Bar
 --------------
 -- Bar length handling.
-local bar_length = beautiful.is_bar_horizontal and dpi(beautiful.full_height)
-                                               or dpi(beautiful.full_width)
+local bar_length = beautiful.is_bar_horizontal and dpi(beautiful.full_width)
+                                               or dpi(beautiful.full_height)
 
 -- The actual bar itself
 screen.connect_signal("request::desktop_decoration", function(s)
@@ -238,7 +236,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
     local taglist_v = wibox.widget {
         {
             gettags(s),
-            margins = dpi(beautiful.bar_size / 3.4),
+            margins = dpi(beautiful.title_font_size),
             widget  = wibox.container.margin
         },
         shape   = helpers.mkroundedrect(),
@@ -297,7 +295,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     {
                         {
                             getlayout(s),
-                            margins = dpi(beautiful.item_spacing),
+                            margins = dpi(beautiful.item_padding),
                             widget  = wibox.container.margin
                         },
                         bg      = beautiful.lbg,

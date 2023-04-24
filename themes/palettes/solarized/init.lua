@@ -10,7 +10,6 @@ local clrs = {}
     clrs.dfg   = "#586e75"
     clrs.nfg   = "#002b36"
 
-
     clrs.red   = "#dc322f"
     clrs.red_d = "#bd2523"
     clrs.grn   = "#859900"

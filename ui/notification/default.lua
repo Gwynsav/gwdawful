@@ -21,8 +21,11 @@ local def_icon  = gc.recolor_image(
 local helpers   = require('helpers')
 local rubato    = require('modules.rubato')
 
-local notif_size = 100
-local graph_size = 75
+local notif_size = beautiful.scaling * 10
+local min_width  = notif_size * 1.33
+local max_width  = notif_size * 2.5
+
+local graph_size = notif_size * 0.75
 
 -- Notifications
 ----------------
@@ -70,7 +73,7 @@ naughty.connect_signal("request::display", function(n)
         {
             markup = n.title:match('.') and "<b>" .. n.title .. "</b>"
                                          or "<b>Notification</b>",
-            font   = beautiful.ui_font .. dpi(13),
+            font   = beautiful.ui_font .. dpi(beautiful.subt_font_size),
             halign = "center",
             widget = wibox.widget.textbox
         }
@@ -84,7 +87,7 @@ naughty.connect_signal("request::display", function(n)
         {
             widget = wibox.widget.textbox,
             halign = "center",
-            font   = beautiful.ui_font .. dpi(11),
+            font   = beautiful.ui_font .. dpi(beautiful.base_font_size),
             text   = gears.string.xml_unescape(n.message)
         }
     }
@@ -98,7 +101,7 @@ naughty.connect_signal("request::display", function(n)
         align  = "center",
         horizontal_fit_policy = "fit",
         vertical_fit_policy   = "fit",
-        clip_shape    = helpers.mkroundedrect(),
+        clip_shape            = helpers.mkroundedrect(),
         buttons = {
             awful.button({}, 1, function() n:destroy() end)
         }
@@ -109,8 +112,8 @@ naughty.connect_signal("request::display", function(n)
         min_value = 0,
         max_value = 100,
         value     = 0,
-        thickness = dpi(4),
-        paddings  = dpi(4),
+        thickness = dpi(beautiful.ring_size),
+        paddings  = dpi(beautiful.ring_size),
         rounded_edge = true,
         colors       = { beautiful.notification_accent },
         bg           = beautiful.lbg,
@@ -123,7 +126,7 @@ naughty.connect_signal("request::display", function(n)
     local actions = wibox.widget {
         notification = n,
         base_layout  = wibox.widget {
-            spacing  = dpi(4),
+            spacing  = dpi(beautiful.item_spacing),
             layout   = wibox.layout.flex.horizontal
         },
         widget_template = {
@@ -131,16 +134,16 @@ naughty.connect_signal("request::display", function(n)
                 {
                     {
                         id       = "text_role",
-                        font     = beautiful.ui_font .. dpi(9),
+                        font     = beautiful.ui_font .. dpi(beautiful.item_padding),
                         widget   = wibox.widget.textbox
                     },
                     align  = "center",
                     widget = wibox.container.place
                 },
-                bottom = dpi(5),
-                top    = dpi(5),
-                left   = dpi(8),
-                right  = dpi(8),
+                bottom = dpi(beautiful.item_spacing),
+                top    = dpi(beautiful.item_spacing),
+                left   = dpi(beautiful.item_padding),
+                right  = dpi(beautiful.item_padding),
                 widget = wibox.container.margin
             },
             bg            = beautiful.blk,
@@ -166,15 +169,15 @@ naughty.connect_signal("request::display", function(n)
                     {
                         {
                             timeout_graph,
-                            margins = dpi(10),
+                            margins = dpi(beautiful.scaling),
                             widget  = wibox.container.margin
                         },
                         strategy = "min",
-                        width    = dpi(33),
+                        width    = dpi(notif_size),
                         widget   = wibox.container.constraint
                     },
                     strategy = "max",
-                    width    = dpi(150),
+                    width    = dpi(max_width),
                     widget   = wibox.container.constraint
                 },
                 {
@@ -199,23 +202,23 @@ naughty.connect_signal("request::display", function(n)
                                                 shape  = helpers.mkroundedrect(),
                                                 widget = wibox.container.background
                                             },
-                                            left    = dpi(5),
-                                            right   = dpi(5),
-                                            top     = dpi(4),
+                                            left    = dpi(beautiful.item_spacing),
+                                            right   = dpi(beautiful.item_spacing),
+                                            top     = dpi(beautiful.item_spacing),
                                             widget  = wibox.container.margin,
                                             visible = n.actions and #n.actions > 0
                                         },
-                                        spacing = dpi(4),
+                                        spacing = dpi(beautiful.item_spacing),
                                         layout  = wibox.layout.fixed.vertical
                                     },
                                     align  = "center",
                                     widget = wibox.container.place
                                 },
                                 margins = {
-                                    left   = dpi(25),
-                                    right  = dpi(25),
-                                    bottom = dpi(13),
-                                    top    = dpi(13)
+                                    left   = dpi(beautiful.giga_padding),
+                                    right  = dpi(beautiful.giga_padding),
+                                    bottom = dpi(beautiful.subt_font_size),
+                                    top    = dpi(beautiful.subt_font_size)
                                 },
                                 widget  = wibox.container.margin
                             },
@@ -224,12 +227,12 @@ naughty.connect_signal("request::display", function(n)
                             widget = wibox.container.background
                         },
                         strategy = "min",
-                        width    = dpi(200),
+                        width    = dpi(min_width),
                         widget   = wibox.container.constraint
                     },
                     strategy = "max",
-                    width    = dpi(130),
-                    height   = dpi(130),
+                    width    = dpi(max_width),
+                    height   = dpi(max_width),
                     widget   = wibox.container.constraint
                 },
                 layout = wibox.layout.fixed.horizontal

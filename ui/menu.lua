@@ -53,7 +53,7 @@ menu.mainmenu.wibox:set_widget(wibox.widget({
             shape  = helpers.mkroundedrect(),
             widget = wibox.container.background,
         },
-        margins = dpi(beautiful.resolution),
+        margins = dpi(beautiful.scaling),
         widget = wibox.container.margin
     },
     bg     = beautiful.bg_normal,
@@ -74,7 +74,7 @@ function awful.menu.new(...)
                     shape  = helpers.mkroundedrect(),
                     widget = wibox.container.background,
                 },
-                margins = dpi(beautiful.resolution),
+                margins = dpi(beautiful.scaling),
                 widget = wibox.container.margin
             },
             widget = wibox.container.background,
