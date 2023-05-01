@@ -22,7 +22,7 @@ local function makeslider(base_icon, color, input, min)
                     {
                         id      = 'icon_role',
                         text    = base_icon,
-                        font    = beautiful.ic_font .. dpi(beautiful.dashboard_size * 0.025),
+                        font    = beautiful.ic_font .. dpi(beautiful.giga_padding),
                         align   = "center",
                         widget  = wibox.widget.textbox
                     },
@@ -38,30 +38,30 @@ local function makeslider(base_icon, color, input, min)
                         {
                             id                  = 'slider_role',
                             bar_shape           = helpers.mkroundedrect(),
-                            bar_height          = dpi(beautiful.dashboard_size / 172),
+                            bar_height          = dpi(beautiful.item_spacing),
                             bar_color           = beautiful.blk,
                             bar_active_color    = beautiful.wht,
                             handle_color        = beautiful.wht,
                             handle_shape        = helpers.mkroundedrect(),
-                            handle_width        = dpi(beautiful.dashboard_size / 64),
+                            handle_width        = dpi(beautiful.subt_font_size),
                             minimum             = min,
                             maximum             = 100,
                             widget              = wibox.widget.slider
                         },
-                        top    = dpi(beautiful.dashboard_size / 96),
-                        bottom = dpi(beautiful.dashboard_size / 96),
+                        top    = dpi(beautiful.item_padding),
+                        bottom = dpi(beautiful.item_padding),
                         widget = wibox.container.margin
                     },
                     direction = "east",
                     widget    = wibox.container.rotate
                 },
-                spacing = dpi(beautiful.dashboard_size / 72),
+                spacing = dpi(beautiful.base_font_size),
                 layout  = wibox.layout.fixed.vertical
             },
-            top     = dpi(beautiful.dashboard_size / 64),
-            bottom  = dpi(beautiful.dashboard_size / 64),
-            left    = dpi(beautiful.dashboard_size / 128),
-            right   = dpi(beautiful.dashboard_size / 128),
+            top     = dpi(beautiful.subt_font_size),
+            bottom  = dpi(beautiful.subt_font_size),
+            left    = dpi(beautiful.item_spacing),
+            right   = dpi(beautiful.item_spacing),
             widget  = wibox.container.margin
         },
         bg     = beautiful.lbg,
@@ -141,7 +141,7 @@ local function sliderbox()
         volumebar,
         mic,
         beautiful.brightness_enabled and brightbar,
-        spacing = dpi(beautiful.dashboard_size / 80),
+        spacing = dpi(beautiful.base_font_size),
         layout  = wibox.layout.flex.vertical
     }
 end

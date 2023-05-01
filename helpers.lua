@@ -69,7 +69,7 @@ function helpers.mkbtn(template, bg, hbg, radius)
     local button = wibox.widget {
         {
             template,
-            margins = dpi(beautiful.resolution * 0.4),
+            margins = dpi(beautiful.ring_size),
             widget  = wibox.container.margin,
         },
         bg     = bg,

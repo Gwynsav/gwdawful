@@ -19,21 +19,21 @@ local flip_dir  = (beautiful.titles_inverted     and beautiful.is_title_horizont
 
 -- Buttons
 ----------
-local mkbutton = function (width, color, onclick)
+local mkbutton = function (width, onclick)
   return function(c)
     local button = wibox.widget {
       wibox.widget.textbox(),
       forced_width  = dpi(width),
       forced_height = dpi(beautiful.title_size),
       bg            = beautiful.titlebar_bg_normal,
-      shape         = helpers.mkroundedrect(0),
+      shape         = helpers.mkroundedrect(beautiful.border_radius),
       widget        = wibox.container.background
     }
 
     local color_transition = helpers.apply_transition {
       element   = button,
       prop      = 'bg',
-      bg        = beautiful.titlebar_bg_normal,
+      bg        = beautiful.titlebar_fg_focus,
       hbg       = beautiful.titlebar_fg_normal,
     }
 
@@ -55,21 +55,21 @@ local mkbutton = function (width, color, onclick)
   end
 end
 
-local close = mkbutton(1.5 * beautiful.title_size, beautiful.red, function(c)
+local close = mkbutton(1.5 * beautiful.title_size, function(c)
     c:kill()
 end)
 
-local maximize = mkbutton(beautiful.title_size, beautiful.ylw, function(c)
+local maximize = mkbutton(beautiful.title_size, function(c)
     c.maximized = not c.maximized
 end)
 
-local minimize = mkbutton(beautiful.title_size, beautiful.ylw, function(c)
+local minimize = mkbutton(beautiful.title_size, function(c)
     gears.timer.delayed_call(function()
         c.minimized = not c.minimized
     end)
 end)
 
-local sticky = mkbutton(beautiful.title_size, beautiful.grn, function(c)
+local sticky = mkbutton(beautiful.title_size, function(c)
     c.sticky = not c.sticky
 end)
 

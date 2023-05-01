@@ -22,8 +22,8 @@ local helpers   = require('helpers')
 local rubato    = require('modules.rubato')
 
 local notif_size = beautiful.scaling * 10
-local min_width  = notif_size * 1.33
-local max_width  = notif_size * 2.5
+local min_width  = notif_size * 2
+local max_width  = notif_size * 3
 
 local graph_size = notif_size * 0.75
 
@@ -146,8 +146,8 @@ naughty.connect_signal("request::display", function(n)
                 right  = dpi(beautiful.item_padding),
                 widget = wibox.container.margin
             },
-            bg            = beautiful.blk,
-            widget        = wibox.container.background
+            bg     = beautiful.blk,
+            widget = wibox.container.background
         },
         style  = {
             underline_normal    = false,
@@ -166,19 +166,9 @@ naughty.connect_signal("request::display", function(n)
         widget_template = {
             {
                 {
-                    {
-                        {
-                            timeout_graph,
-                            margins = dpi(beautiful.scaling),
-                            widget  = wibox.container.margin
-                        },
-                        strategy = "min",
-                        width    = dpi(notif_size),
-                        widget   = wibox.container.constraint
-                    },
-                    strategy = "max",
-                    width    = dpi(max_width),
-                    widget   = wibox.container.constraint
+                    timeout_graph,
+                    margins = dpi(beautiful.scaling),
+                    widget  = wibox.container.margin
                 },
                 {
                     {

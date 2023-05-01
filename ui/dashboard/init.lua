@@ -88,10 +88,10 @@ awesome.connect_signal("widget::dashboard", function()
     awful.placement.next_to(
         dashboardBox,
         {
-            preferred_positions = beautiful.bar_position == "left" and "right" or
-                                  beautiful.bar_position == "right" and "left" or
-                                  beautiful.bar_position == "top" and "bottom" or
-                                  beautiful.bar_position == "bottom" and "top",
+            preferred_positions = beautiful.bar_side == "left" and "right" or
+                                  beautiful.bar_side == "right" and "left" or
+                                  beautiful.bar_side == "top" and "bottom" or
+                                  beautiful.bar_side == "bottom" and "top",
             preferred_anchors   = "front",
             margins             = dpi(beautiful.useless_gap * 2),
             geometry            = awful.screen.focused().mywibox

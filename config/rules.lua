@@ -65,7 +65,7 @@ ruled.client.connect_signal("request::rules", function()
     }
     -- Set Discord and Revolt to map to tag "6".
     ruled.client.append_rule {
-        rule       = {
+        rule_any   = {
             class = { "discord", "Revolt" }
         },
         properties = { tag   = "6" }

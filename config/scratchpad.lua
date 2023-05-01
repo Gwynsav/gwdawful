@@ -10,42 +10,23 @@ local dpi       = beautiful.xresources.apply_dpi
 local bling     = require('modules.bling')
 local rubato    = require('modules.rubato')
 
--- Animation
-------------
-local anim_y = rubato.timed {
-    pos             = dpi(beautiful.scaling * 101),
-    rate            = 60,
-    easing          = rubato.quadratic,
-    intro           = 0.1,
-    duration        = 0.3,
-    awestore_compat = true -- This option must be set to true.
-}
-local anim_x = rubato.timed {
-    pos             = dpi(beautiful.scaling * 40),
-    rate            = 60,
-    easing          = rubato.quadratic,
-    intro           = 0.1,
-    duration        = 0.3,
-    awestore_compat = true -- This option must be set to true.
-}
-
 -- Setup
 --------
 -- Positioning spaguetti. Essentially, this block ensures the scratchpad is always at the center of
 -- the work area by taking the dimensions of the wibar and its gaps into account.
 local x_position     = 
-    not beautiful.bar_enabled or beautiful.bar_type == "horizontal" and
+    not beautiful.bar_enabled or beautiful.is_bar_horizontal and
         (beautiful.full_width - beautiful.scratchpad_width) / 2 
-    or beautiful.bar_position == "left" and 
+    or beautiful.bar_side == "left" and 
         (beautiful.full_width - beautiful.scratchpad_width + beautiful.bar_size) / 2
-    or beautiful.bar_position == "right" and 
+    or beautiful.bar_side == "right" and 
         (beautiful.full_width - beautiful.scratchpad_width - beautiful.bar_size) / 2
 local y_position     = 
-    not beautiful.bar_enabled or beautiful.bar_type == "vertical" and
+    not beautiful.bar_enabled or not beautiful.is_bar_horizontal and
         (beautiful.full_height - beautiful.scratchpad_height) / 2
-    or beautiful.bar_position == "top" and 
+    or beautiful.bar_side == "top" and 
         (beautiful.full_height - beautiful.scratchpad_height + beautiful.bar_size) / 2
-    or beautiful.bar_position == "bottom" and 
+    or beautiful.bar_side == "bottom" and 
         (beautiful.full_height - beautiful.scratchpad_height - beautiful.bar_size) / 2
 
 -- Determine terminal runtime command and rule matching title/class.
@@ -81,26 +62,25 @@ scratch.terminal = bling.module.scratchpad {
     }, 
     -- Reopening the scratchpad resets geometry properties.
     reapply     = true,
-    rubato      = { x = anim_x, y = anim_y },
     dont_focus_before_close  = false                      
 }
 
 -- Music player scratchpad
-local music_height = dpi(beautiful.full_height * 45)
-local music_width  = dpi(beautiful.full_width * 33)
-local x_music     = 
-    not beautiful.bar_enabled or beautiful.bar_type == "horizontal" and
+local music_height = dpi(beautiful.full_height * 0.45)
+local music_width  = dpi(beautiful.full_width * 0.33)
+local x_music = 
+    not beautiful.bar_enabled or beautiful.is_bar_horizontal and
         (beautiful.full_width - music_width) / 2 
-    or beautiful.bar_position == "left" and 
+    or beautiful.bar_side == "left" and 
         (beautiful.full_width - music_width + beautiful.bar_size) / 2
-    or beautiful.bar_position == "right" and 
+    or beautiful.bar_side == "right" and 
         (beautiful.full_width - music_width - beautiful.bar_size) / 2
-local y_music     = 
-    not beautiful.bar_enabled or beautiful.bar_type == "vertical" and
+local y_music = 
+    not beautiful.bar_enabled or not beautiful.is_bar_horizontal and
         (beautiful.full_height - music_height) / 2
-    or beautiful.bar_position == "top" and 
+    or beautiful.bar_side == "top" and 
         (beautiful.full_height - music_height + beautiful.bar_size) / 2
-    or beautiful.bar_position == "bottom" and 
+    or beautiful.bar_side == "bottom" and 
         (beautiful.full_height - music_height - beautiful.bar_size) / 2
 
 scratch.music = bling.module.scratchpad {
@@ -119,7 +99,6 @@ scratch.music = bling.module.scratchpad {
     }, 
     -- Reopening the scratchpad resets geometry properties.
     reapply     = true,
-    rubato      = { x = anim_x, y = anim_y },
     dont_focus_before_close  = false                      
 }
 

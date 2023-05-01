@@ -30,8 +30,8 @@ local user = {}
 --- Keyboard layouts to switch between using `mod + u`. Comment `kb_layout2` 
 --- to disable this behavior. If set, `kb_layout1` will be set as keyboard 
 --- layout on startup.
-user.kb_layout1   = "us"
-user.kb_layout2   = "latam"
+-- user.kb_layout1   = "us"
+-- user.kb_layout2   = "latam"
 
 -- Features
 -----------
@@ -52,15 +52,15 @@ user.kb_layout2   = "latam"
 
 --- Enable/disable bluetooth metrics. No need to specify device name.
 --- Defaults to false.
-user.bluetooth    = true
+-- user.bluetooth    = true
 
 -- UI
 -----
 --- The '*_size' variables are screen height percentages.
 --- So, dash_size being 66 means it'll take 66% of my monitor height.
 
---- Vertical Resolution of your monitor. Defaults to 1080.
--- user.resolution   = 1080
+--- UI scaling ratio, starting at 1080p. Defaults to 1.00.
+-- user.scaling      = 1.00
 --- Your monitor's aspect ratio, commonly 16:9 or 16:10. Defaults to 16/9.
 -- user.aspect_ratio = 16/9
 --- Your monitor's dpi. May or may not be extremely breaking to the UI. 
@@ -73,33 +73,14 @@ user.bluetooth    = true
 --- by emitting the 'widget::bar' signal (mod + b) even if disabled.
 --- Defaults to true.
 -- user.bar_enabled  = true
---- System bar size (screen %). Defaults to 4.5.
--- user.bar_size     = 4.5
 --- Can be 'top', 'bottom', 'right' or 'left'. Defaults to 'left'.
-user.bar_pos      = "right"
---- Adds 'outer_gaps' to the bar. Defaults to false.
--- user.bar_gap      = false
+-- user.bar_pos      = "right"
 
 --- Titles
 --- Toggles titlebars. Defaults to true.
 -- user.title_enable = true
 --- Toggles inverted titlebar layout. Defaults to false.
 -- user.title_invert = true
---- Titlebars size (screen %). Defaults to 3.
--- user.titles_size  = 3
---- Can be 'top', 'bottom', 'right' or 'left'. Defaults to 'top'.
--- user.titles_pos   = "right"
-
---- Dashboard
---- Dashboard size (screen %). Defaults to 75.
--- user.dash_size    = 75
-
---- Notifications
---- Notification size (screen %). Defaults to 9.
--- user.notif_size   = 9
---- Can be 'top_left', 'top_right', 'bottom_left' or 'bottom_right'. 
---- Avoids bar by default.
--- user.notif_pos    = "top_left"
 
 --- Gaps. 
 ---   Inner gaps are common gaps. Default to 0.4.
@@ -112,7 +93,7 @@ user.bar_pos      = "right"
 --- Size of borders used on windows and some widgets (screen %). Defaults to 0.
 -- user.border_size  = 0.2 -- 2 pixel border on 1080p
 --- Radius of borders used on windows and some widgets. Defaults to 0.8.
-user.border_rad   = 0
+-- user.border_rad   = 0
 --- Should clients/windows be rounded using `border_rad`. Defaults to false.
 -- user.round_client = false
 
@@ -120,11 +101,11 @@ user.border_rad   = 0
 ----------
 --- Supported themes:
 ---  dark:
----    'everblush', 'everforest', 'tokyonight', 'fullerene' 
+---    'everblush', 'everforest', 'tokyonight', 'fullerene', 'oxocarbon' 
 ---  light:
 ---    'gruvbox', 'solarized'
 --- More themes can be added at `themes/palettes`. DOES NOT have a default.
-user.clr_palette  = "everforest"
+user.clr_palette  = "oxocarbon"
 --- GTK icon pack to use, comment for Papirus or name.
 -- user.icon_pack    = "Papirus"
 --- Fonts to be used.
@@ -135,7 +116,7 @@ user.clr_palette  = "everforest"
 
 --- Lua doesn't take '~' for home, use os.getenv('HOME').
 --- Your *amazing* profile picture. Path or comment for default.
--- user.avatar       = os.getenv("HOME") .. "/Pictures/avatars/serasAlt.jpg"
+-- user.avatar       = "/etc/nixos/systems/shared/assets/avatar.png"
 --- Your wallpaper path. Path, or comment for colorscheme default.
 -- user.wall         = os.getenv("HOME") .. "/Pictures/walls/everblush/Smily.jpg"
 --- Music player fallback background. Path, or comment for colorscheme default.
@@ -143,7 +124,7 @@ user.clr_palette  = "everforest"
 --- AwesomeWM icon to be used (comment for default awesome icon): 
 ---   'arch', 'debian', 'fedora', 'nix', 'ubuntu' or 'void'.
 --- Can also be a path to an image.
-user.awm_icon     = "nix"
+-- user.awm_icon     = "nix"
 
 -- Miscelaneous
 ---------------
@@ -152,10 +133,10 @@ user.awm_icon     = "nix"
 -- user.scrnshot_dir = os.getenv("HOME") .. "/Pictures/"
 
 --- Terminal scratchpad. Brought up with `mod + Ctrl + Return`.
---- Horizontal screen percentage used as width. Defaults to 40.
--- user.scratch_wide = 40
---- Vertical screen percentage used as height. Defaults to 66.
--- user.scratch_high = 66
+--- Horizontal screen percentage used as width. Defaults to 0.40.
+-- user.scratch_wide = 0.40
+--- Vertical screen percentage used as height. Defaults to 0.66.
+-- user.scratch_high = 0.66
 
 -- Autostart
 ------------

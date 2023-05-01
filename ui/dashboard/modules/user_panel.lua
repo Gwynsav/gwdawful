@@ -16,7 +16,7 @@ local helpers   = require('helpers')
 ---------------
 local greeter = wibox.widget {
     markup = "Welcome, <b>user!</b>",
-    font   = beautiful.ui_font .. dpi(beautiful.dashboard_size * 0.021),
+    font   = beautiful.ui_font .. dpi(beautiful.title_font_size),
     widget = wibox.widget.textbox
 }
 awful.spawn.easy_async_with_shell(
@@ -28,7 +28,7 @@ awful.spawn.easy_async_with_shell(
 
 local uptime = wibox.widget {
     text   = "Uptime unknown...",
-    font   = beautiful.ui_font .. dpi(beautiful.dashboard_size * 0.013),
+    font   = beautiful.ui_font .. dpi(beautiful.base_font_size),
     widget = wibox.widget.textbox
 }
 local function get_uptime()
@@ -55,8 +55,8 @@ local avatar = wibox.widget {
       horizontal_fit_policy = "fit",
       vertical_fit_policy   = "fit"
    },
-   paddings     = dpi(beautiful.dashboard_size * 0.006),
-   thickness    = dpi(beautiful.dashboard_size * 0.004),
+   paddings     = dpi(beautiful.ring_size),
+   thickness    = dpi(beautiful.ring_size * 0.75),
    max_value    = 100,
    value        = 100,
    rounded_edge = beautiful.border_radius > 0,
@@ -64,7 +64,7 @@ local avatar = wibox.widget {
       {
          type  = "linear",
          from  = { 0, 0 },
-         to    = { dpi(beautiful.dashboard_size / 10), dpi(beautiful.dashboard_size / 10) },
+         to    = { dpi(beautiful.giga_padding), dpi(beautiful.giga_padding) },
          stops = { { 0, beautiful.grn }, { 1, beautiful.grn_d } }
       }
    },
@@ -78,7 +78,7 @@ local bat_bar = wibox.widget {
       {
          {
             id      = 'icon_role',
-            font    = beautiful.ic_font .. dpi(beautiful.dashboard_size * 0.018),
+            font    = beautiful.ic_font .. dpi(beautiful.subt_font_size),
             halign  = "left",
             valign  = "center",
             widget  = wibox.widget.textbox
@@ -89,16 +89,16 @@ local bat_bar = wibox.widget {
       {
          {
             id      = 'text_role',
-            font    = beautiful.ui_font .. dpi(beautiful.dashboard_size * 0.013), 
+            font    = beautiful.ui_font .. dpi(beautiful.base_font_size), 
             widget  = wibox.widget.textbox
          },
          fg     = beautiful.wht,
          widget = wibox.container.background
       },
-      spacing = dpi(beautiful.dashboard_size / 128),
+      spacing = dpi(beautiful.item_spacing),
       layout  = wibox.layout.fixed.horizontal
    },
-   left   = dpi(beautiful.dashboard_size / 128),
+   left   = dpi(beautiful.item_spacing),
    widget = wibox.container.margin,
    set_icon   = function(self, new_icon)
        self:get_children_by_id('icon_role')[1].text = new_icon
@@ -131,7 +131,7 @@ local function txtbtn(icon, action)
     return wibox.widget {
         {
             text   = icon,
-            font   = beautiful.ic_font .. dpi(beautiful.dashboard_size * 0.025),
+            font   = beautiful.ic_font .. dpi(beautiful.giga_padding),
             align  = "center",
             widget = wibox.widget.textbox
         },
@@ -175,18 +175,15 @@ local function user_profile()
                         valign = "center",
                         widget = wibox.container.place
                     },
-                    left   = dpi(beautiful.dashboard_size / 48),
-                    right  = dpi(beautiful.dashboard_size / 64),
-                    top    = dpi(beautiful.dashboard_size / 64),
+                    left   = dpi(beautiful.title_font_size),
+                    right  = dpi(beautiful.subt_font_size),
+                    top    = dpi(beautiful.subt_font_size),
                     widget = wibox.container.margin
                 },
                 layout  = wibox.layout.fixed.horizontal
             },
-            left   = dpi(beautiful.dashboard_size * 0.018),
-            bottom = dpi(beautiful.dashboard_size * 0.018),
-            top    = dpi(beautiful.dashboard_size * 0.018),
-            right  = dpi(beautiful.dashboard_size * 0.02),
-            widget = wibox.container.margin
+            margins = dpi(beautiful.title_font_size),
+            widget  = wibox.container.margin
         },
         nil,
         {
@@ -194,7 +191,7 @@ local function user_profile()
                 {
                     {
                         bat_bar,
-                        margins = dpi(beautiful.dashboard_size / 400),
+                        margins = dpi(beautiful.ring_size),
                         visible = beautiful.battery_enabled,
                         widget  = wibox.container.margin
                     },
@@ -203,12 +200,12 @@ local function user_profile()
                         helpers.mkbtn(logoff,   beautiful.lbg, beautiful.gry),
                         helpers.mkbtn(reboot,   beautiful.lbg, beautiful.gry),
                         helpers.mkbtn(shutdown, beautiful.lbg, beautiful.gry),
-                        spacing = dpi(beautiful.dashboard_size / 220),
+                        spacing = dpi(beautiful.ring_size),
                         layout  = wibox.layout.fixed.horizontal
                     },
                     layout = wibox.layout.align.horizontal
                 },
-                margins = dpi(beautiful.dashboard_size / 192),
+                margins = dpi(beautiful.ring_size),
                 widget  = wibox.container.margin
             },
             bg     = beautiful.blk,

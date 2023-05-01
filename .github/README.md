@@ -31,8 +31,8 @@ a few variables in the `userconf.lua` file.
 - [Network Manager](https://github.com/NetworkManager/NetworkManager) (network signals)
 - [Pipewire](https://github.com/PipeWire/pipewire) and
 [Wireplumber](https://github.com/PipeWire/wireplumber) (audio signals)
-- [shotgun](https://github.com/neXromancers/shotgun),
-[hacksaw](https://github.com/neXromancers/hacksaw),
+- [maim](https://github.com/naelstrof/maim),
+[slop](https://github.com/naelstrof/slop),
 [xclip](https://github.com/astrand/xclip) (screenshots)
 - [IBM Plex](https://github.com/IBM/plex) and
 [Material Icons](https://github.com/google/material-design-icons)
@@ -168,17 +168,10 @@ bar positions, and much more, as well as toggling features.
 | `border_size`  | `number`  | Size of client and widget borders (screen%). Defaults to **0**.                    |
 | `border_rad`   | `number`  | Border rounding (screen%), 0 to disable. Defaults to **0.8**.                      |
 | `bar_enabled`  | `boolean` | Change default bar state. Defaults to **true**.                                    |
-| `bar_size`     | `number`  | Change bar thickness (screen%). Defaults to **4.5**.                               |
 | `bar_pos`      | `string`  | May be: "left", "top", "right", "bottom". Defaults to **"left"**.                  |
-| `bar_gap`      | `boolean` | Apply outer_gaps to bar. Defaults to **false**.                                    |
 | `title_enable` | `boolean` | Enable/disable client titlebars. Defaults to **true**.                             |
-| `titles_size`  | `number`  | Change titlebar thickness (screen%). Defaults to **3**.                            |
-| `titles_pos`   | `string`  | May be: "left", "top", "right", "bottom". Defaults to **"top"**.                   |
-| `dash_size`    | `number`  | Change dashboard size (screen%). Defaults to **75**.                               |
-| `notif_size`   | `number`  | Change notification size (screen%). Defaults to **9**.                             |
-| `notif_pos`    | `string`  | May be: "top_left", "top_right", "bottom_left", "bottom_right". Defaults to **auto** |
 | Theming        | -         | -                                                      |
-| `clr_palette`  | `string`  | "catppuccin", "everblush", "everforest", "tokyonight", "gruvbox", "solarized". Does **NOT** have a default. |
+| `clr_palette`  | `string`  | "everblush", "everforest", "tokyonight", "gruvbox", "solarized", "fullerene", "oxocarbon". Does **NOT** have a default. |
 | `icon_pack`    | `string`  | GTK icon pack name. Defaults to **"Papirus"**.                                     |
 | `ui_font`      | `string`  | Name of main UI font. Does **NOT** take size. Defaults to **"IBM Plex Sans"**.     |
 | `ic_font`      | `string`  | Name of text icon font. Does **NOT** take size. Defaults to **"Material Icons"**.  |
